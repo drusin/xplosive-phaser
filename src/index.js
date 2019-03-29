@@ -2,6 +2,10 @@ import Phaser from 'phaser';
 import mapJson from './assets/map.json';
 import tiles from './assets/brick-sheet.png';
 import sheet from './assets/textures.png';
+import engine from './yanecs/Engine';
+import Entity from "./yanecs/Entity";
+import StringComponent from "./system/StringComponent";
+import StringSystem from "./system/StringSystem";
 
 const config = {
   type: Phaser.AUTO,
@@ -27,6 +31,12 @@ const config = {
 const game = new Phaser.Game(config);
 let player;
 let cursors;
+
+const e1 = new Entity().addComponent(new StringComponent('first'));
+const e2 = new Entity().addComponent(new StringComponent('second'));
+const e3 = new Entity().addComponent(new StringComponent('third'));
+engine.addEntiies(e1, e2, e3);
+engine.addSystem(new StringSystem());
 
 function preload() {
   this.load.image('tiles', tiles);
@@ -82,6 +92,7 @@ function create() {
 function update() {
   movement();
   animation();
+  engine.process();
 }
 
 function animation() {
