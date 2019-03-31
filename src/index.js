@@ -61,9 +61,9 @@ function create() {
     .addComponent(new ControlComponent())
     .addComponent(animComponent);
   engine.addEntities(playerEntity);
-  engine.addSystem(new AnimationSystem());
-  engine.addSystem(new MovementSystem());
-  engine.addSystem(new ControlSystem(cursors));
+  engine.addSystems(new AnimationSystem(),
+    new MovementSystem(),
+    new ControlSystem(cursors));
 }
 
 function createAnims(creator) {
@@ -114,6 +114,4 @@ function createAnims(creator) {
 
 function update() {
   engine.process();
-
-  console.log(player.body.velocity);
 }
