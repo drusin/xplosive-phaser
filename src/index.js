@@ -3,9 +3,13 @@ import mapJson from './assets/map.json';
 import tiles from './assets/brick-sheet.png';
 import sheet from './assets/textures.png';
 import engine from './yanecs/Engine';
-import Entity from "./yanecs/Entity";
-import StringComponent from "./system/StringComponent";
-import StringSystem from "./system/StringSystem";
+import AnimationComponent from './system/AnimationComponent.js';
+import AnimationSystem from './system/AnimationSystem.js';
+import Entity from './yanecs/Entity.js';
+import SpriteComponent from './system/SpriteComponent.js';
+import ControlComponent from './system/ControlComponent.js';
+import MovementSystem from './system/MovementSystem.js';
+import ControlSystem from './system/ControlSystem.js';
 
 const config = {
   type: Phaser.AUTO,
@@ -32,12 +36,6 @@ const game = new Phaser.Game(config);
 let player;
 let cursors;
 
-const e1 = new Entity().addComponent(new StringComponent('first'));
-const e2 = new Entity().addComponent(new StringComponent('second'));
-const e3 = new Entity().addComponent(new StringComponent('third'));
-engine.addEntiies(e1, e2, e3);
-engine.addSystem(new StringSystem());
-
 function preload() {
   this.load.image('tiles', tiles);
   this.load.tilemapTiledJSON('map', mapJson);
@@ -56,79 +54,66 @@ function create() {
   cursors = this.input.keyboard.createCursorKeys();
   this.physics.add.collider(player, walls);
 
-  this.anims.create({
+  const animComponent = createAnims(this);
+
+  const playerEntity = new Entity()
+    .addComponent(new SpriteComponent(player))
+    .addComponent(new ControlComponent())
+    .addComponent(animComponent);
+  engine.addEntities(playerEntity);
+  engine.addSystem(new AnimationSystem());
+  engine.addSystem(new MovementSystem());
+  engine.addSystem(new ControlSystem(cursors));
+}
+
+function createAnims(creator) {
+  const idle = creator.anims.create({
     key: 'idle',
-    frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 1 }),
+    frames: creator.anims.generateFrameNumbers('dude', { start: 0, end: 1 }),
     frameRate: 3,
     repeat: -1
   });
-  this.anims.create({
+  const down = creator.anims.create({
     key: 'down',
-    frames: this.anims.generateFrameNumbers('dude', { start: 2, end: 5 }),
+    frames: creator.anims.generateFrameNumbers('dude', { start: 2, end: 5 }),
     frameRate: 6,
     repeat: -1
   });
-  this.anims.create({
+  const up = creator.anims.create({
     key: 'up',
-    frames: this.anims.generateFrameNumbers('dude', { start: 14, end: 15 }),
+    frames: creator.anims.generateFrameNumbers('dude', { start: 14, end: 15 }),
     frameRate: 6,
     repeat: -1
   });
-  this.anims.create({
+  const right = creator.anims.create({
     key: 'right',
-    frames: this.anims.generateFrameNumbers('dude', { start: 6, end: 9 }),
+    frames: creator.anims.generateFrameNumbers('dude', { start: 6, end: 9 }),
     frameRate: 6,
     repeat: -1
   });
-  this.anims.create({
+  const left = creator.anims.create({
     key: 'left',
     flipX: true,
-    frames: this.anims.generateFrameNumbers('dude', { start: 10, end: 13 }),
+    frames: creator.anims.generateFrameNumbers('dude', { start: 10, end: 13 }),
     frameRate: 6,
     repeat: -1
   });
+
+  return new AnimationComponent({
+    left,
+    upLeft: left,
+    up,
+    upRight: right,
+    right,
+    downRight: right,
+    down,
+    downLeft: left,
+    idle
+  })
 }
 
 function update() {
-  movement();
-  animation();
   engine.process();
-}
 
-function animation() {
-  const velocity = player.body.velocity;
-  if (velocity.x === 0 && velocity.y === 0) {
-    player.anims.play('idle', true);
-  }
-  else if (velocity.y !== 0) {
-    player.anims.play(velocity.y > 0 ? 'down' : 'up', true);
-  }
-  else if (velocity.x < 0) {
-    player.anims.play('left', true);
-  }
-  else {
-    player.anims.play('right', true);
-  }
+  console.log(player.body.velocity);
 }
-
-function movement() {
-  if (cursors.left.isDown) {
-    player.setVelocityX(-16);
-  }
-  else if (cursors.right.isDown) {
-    player.setVelocityX(16);
-  }
-  else {
-    player.setVelocityX(0);
-  }
-  if (cursors.up.isDown) {
-    player.setVelocityY(-16);
-  }
-  else if (cursors.down.isDown) {
-    player.setVelocityY(16);
-  }
-  else {
-    player.setVelocityY(0);
-  }
-}
-

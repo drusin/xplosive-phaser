@@ -1,5 +1,5 @@
 export default class System {
-	constructor(componentNames) {
+	constructor(...componentNames) {
 		this._componentNames = componentNames;
 	}
 	

@@ -1,9 +1,5 @@
 export default class Component {
-	constructor (name) {
-		this._name = name;
-	}
-	
 	get name() {
-		return this._name;
+		return this.constructor.name;
 	}
 }

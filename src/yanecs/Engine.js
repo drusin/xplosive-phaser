@@ -1,6 +1,6 @@
 const entities = new Set();
 
-const addEntiies = (...newEntities) => {
+const addEntities = (...newEntities) => {
 	newEntities.forEach(entity => entities.add(entity));
 };
 
@@ -19,7 +19,7 @@ const process = () => {
 };
 
 export default {
-	addEntiies,
+	addEntities,
 	addSystem,
 	process
 }
