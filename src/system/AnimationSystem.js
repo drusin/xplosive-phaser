@@ -1,14 +1,15 @@
 import SpriteComponent from "./SpriteComponent";
 import AnimationComponent from "./AnimationComponent";
 import System from '../yanecs/System';
+import BodyComponent from "./BodyComponent";
 
 export default class AnimationSystem extends System {
     constructor () {
-        super (SpriteComponent.name, AnimationComponent.name);
+        super (SpriteComponent.name, AnimationComponent.name, BodyComponent.name);
     }
 
     process(entity) {
-        const { velocity, blocked } = entity.getComponent(SpriteComponent.name).sprite.body;
+        const { velocity, blocked } = entity.getComponent(BodyComponent.name).body;
         const { anims } = entity.getComponent(SpriteComponent.name).sprite;
         const animNames = entity.getComponent(AnimationComponent.name);
 

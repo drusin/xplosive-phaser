@@ -1,28 +1,28 @@
 import System from "../yanecs/System";
-import SpriteComponent from "./SpriteComponent";
 import ControlComponent from "./ControlComponent";
+import BodyComponent from "./BodyComponent";
 
 export default class MovementSystem extends System {
     constructor() {
-        super(SpriteComponent.name, ControlComponent.name)
+        super(BodyComponent.name, ControlComponent.name)
     }
 
     process(entity) {
-        const { sprite } = entity.getComponent(SpriteComponent.name);
+        const { body } = entity.getComponent(BodyComponent.name);
         const { left, right, up, down } = entity.getComponent(ControlComponent.name);
 
         if (!(left || right)) {
-            sprite.setVelocityX(0);
+            body.setVelocityX(0);
         }
         else {
-            sprite.setVelocityX(left ? -16 : 16);
+            body.setVelocityX(left ? -16 : 16);
         }
 
         if (!(up || down)) {
-            sprite.setVelocityY(0);
+            body.setVelocityY(0);
         }
         else {
-            sprite.setVelocityY(up ? -16 : 16);
+            body.setVelocityY(up ? -16 : 16);
         }
     }
 }

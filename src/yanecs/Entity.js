@@ -1,3 +1,5 @@
+import Component from "./Component";
+
 export default class Entity {
 	constructor() {
 		this._components = new Map();
@@ -18,5 +20,14 @@ export default class Entity {
 	addComponent(component) {
 		this._components.set(component.name, component);
 		return this;
+	}
+	
+	static fromJson(json) {
+		const entity = new Entity();
+		Object.values(json._components).forEach(value => entity.addComponent(Component.fromJson(value)));
+	}
+	
+	toJSON() {
+		return { _components: this.components }
 	}
 }

@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import mapJson from './assets/map.json';
 import tiles from './assets/brick-sheet.png';
 import sheet from './assets/textures.png';
-import engine from './yanecs/Engine';
+import engine from './yanecs/engine';
 import AnimationComponent from './system/AnimationComponent.js';
 import AnimationSystem from './system/AnimationSystem.js';
 import Entity from './yanecs/Entity.js';
@@ -10,6 +10,7 @@ import SpriteComponent from './system/SpriteComponent.js';
 import ControlComponent from './system/ControlComponent.js';
 import MovementSystem from './system/MovementSystem.js';
 import ControlSystem from './system/ControlSystem.js';
+import BodyComponent from "./system/BodyComponent";
 
 const config = {
   type: Phaser.AUTO,
@@ -58,12 +59,17 @@ function create() {
 
   const playerEntity = new Entity()
     .addComponent(new SpriteComponent(player))
+  	.addComponent(new BodyComponent(player.body))
     .addComponent(new ControlComponent())
     .addComponent(animComponent);
   engine.addEntities(playerEntity);
   engine.addSystems(new AnimationSystem(),
     new MovementSystem(),
     new ControlSystem(cursors));
+  
+  window.playerEntity = playerEntity;
+  
+  console.log(player);
 }
 
 function createAnims(creator) {
