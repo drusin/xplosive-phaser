@@ -7,5 +7,7 @@ export default class System {
 		return this._componentNames;
 	}
 	
-	process(entities) {}
+	process(entities) {
+		console.error(`${this.constructor.name} does not overwrite the "process" method!`);
+	}
 }

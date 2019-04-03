@@ -1,6 +1,9 @@
-import System from "../yanecs/System";
-import ControlComponent from "./ControlComponent";
-import BodyComponent from "./BodyComponent";
+import System from '../yanecs/System';
+import ControlComponent from './ControlComponent';
+import BodyComponent from './BodyComponent';
+import constants from '../constants';
+
+const { SPEED } = constants;
 
 export default class MovementSystem extends System {
     constructor() {
@@ -15,14 +18,14 @@ export default class MovementSystem extends System {
             body.setVelocityX(0);
         }
         else {
-            body.setVelocityX(left ? -16 : 16);
+            body.setVelocityX(left ? -SPEED : SPEED);
         }
 
         if (!(up || down)) {
             body.setVelocityY(0);
         }
         else {
-            body.setVelocityY(up ? -16 : 16);
+            body.setVelocityY(up ? -SPEED : SPEED);
         }
     }
 }
