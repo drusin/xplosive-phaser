@@ -3,6 +3,8 @@ import engine from './yanecs/engine';
 import preload from './preload';
 import create from './create';
 
+let anims = {};
+
 const config = {
   type: Phaser.AUTO,
   pixelArt: true,
@@ -17,7 +19,10 @@ const config = {
     }
   },
   backgroundColor: '#cccccc',
-  scene: { preload, create, update },
+  scene: { 
+    preload,
+    create,
+    update },
   physics: {
     default: 'arcade',
     arcade: { debug: false }

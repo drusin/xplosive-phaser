@@ -1,4 +1,5 @@
 const CONSTANTS = {
+    FPS: 60,
     SPEED: 16
 }
 
