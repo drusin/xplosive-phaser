@@ -13,5 +13,6 @@ export default class ControlSystem extends System {
         control.right = this._keys.right.isDown;
         control.up = this._keys.up.isDown;
         control.down = this._keys.down.isDown;
+        control.action = this._keys.space.isDown;
     }
 }

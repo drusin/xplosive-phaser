@@ -3,13 +3,11 @@ import engine from './yanecs/engine';
 import preload from './preload';
 import create from './create';
 
-let anims = {};
-
 const config = {
   type: Phaser.AUTO,
   pixelArt: true,
   scale: {
-    parent: 'phaser-example',
+    parent: 'xplosive',
     mode: Phaser.Scale.FIT,
     width: 64,
     height: 64,
@@ -26,7 +24,7 @@ const config = {
   physics: {
     default: 'arcade',
     arcade: { debug: false }
-  },
+  }
 };
 
 new Phaser.Game(config);

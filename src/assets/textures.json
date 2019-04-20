@@ -702,6 +702,62 @@
     "spriteSourceSize": { "x": 0, "y": 0, "w": 8, "h": 8 },
     "sourceSize": { "w": 8, "h": 8 },
     "duration": 333
+   },
+   "textures 88.aseprite": {
+    "frame": { "x": 704, "y": 0, "w": 8, "h": 8 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 8, "h": 8 },
+    "sourceSize": { "w": 8, "h": 8 },
+    "duration": 333
+   },
+   "textures 89.aseprite": {
+    "frame": { "x": 712, "y": 0, "w": 8, "h": 8 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 8, "h": 8 },
+    "sourceSize": { "w": 8, "h": 8 },
+    "duration": 333
+   },
+   "textures 90.aseprite": {
+    "frame": { "x": 720, "y": 0, "w": 8, "h": 8 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 8, "h": 8 },
+    "sourceSize": { "w": 8, "h": 8 },
+    "duration": 333
+   },
+   "textures 91.aseprite": {
+    "frame": { "x": 728, "y": 0, "w": 8, "h": 8 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 8, "h": 8 },
+    "sourceSize": { "w": 8, "h": 8 },
+    "duration": 333
+   },
+   "textures 92.aseprite": {
+    "frame": { "x": 736, "y": 0, "w": 8, "h": 8 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 8, "h": 8 },
+    "sourceSize": { "w": 8, "h": 8 },
+    "duration": 333
+   },
+   "textures 93.aseprite": {
+    "frame": { "x": 744, "y": 0, "w": 8, "h": 8 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 8, "h": 8 },
+    "sourceSize": { "w": 8, "h": 8 },
+    "duration": 333
+   },
+   "textures 94.aseprite": {
+    "frame": { "x": 752, "y": 0, "w": 8, "h": 8 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 8, "h": 8 },
+    "sourceSize": { "w": 8, "h": 8 },
+    "duration": 333
    }
  },
  "meta": {
@@ -709,7 +765,7 @@
   "version": "1.2.9-x64",
   "image": "D:\\dev\\repos\\xplosive-phaser\\src\\assets\\textures.png",
   "format": "RGBA8888",
-  "size": { "w": 704, "h": 8 },
+  "size": { "w": 760, "h": 8 },
   "scale": "1",
   "frameTags": [
    { "name": "blue", "from": 0, "to": 19, "direction": "forward" },
@@ -740,7 +796,15 @@
    { "name": "left", "from": 70, "to": 73, "direction": "forward" },
    { "name": "up", "from": 74, "to": 75, "direction": "forward" },
    { "name": "dead", "from": 76, "to": 79, "direction": "forward" },
-   { "name": "bomb", "from": 80, "to": 87, "direction": "forward" }
+   { "name": "bomb", "from": 80, "to": 87, "direction": "forward" },
+   { "name": "fire", "from": 88, "to": 94, "direction": "forward" },
+   { "name": "center", "from": 88, "to": 88, "direction": "forward" },
+   { "name": "horizontal", "from": 89, "to": 89, "direction": "forward" },
+   { "name": "vertical", "from": 90, "to": 90, "direction": "forward" },
+   { "name": "down", "from": 91, "to": 91, "direction": "forward" },
+   { "name": "left", "from": 92, "to": 92, "direction": "forward" },
+   { "name": "right", "from": 93, "to": 93, "direction": "forward" },
+   { "name": "up", "from": 94, "to": 94, "direction": "forward" }
   ],
   "layers": [
    { "name": "Sprite Sheet", "opacity": 255, "blendMode": "normal" }

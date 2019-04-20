@@ -1,8 +1,8 @@
 function readTags(json) {
-    let index = 0;
+    let index = -1;
     let animTags = [];
     json.meta.frameTags.forEach(frameTag => {
-        if (frameTag.from >= index) {
+        if (frameTag.from > index) {
             animTags.push(Object.assign({}, frameTag, { animTags: [] }));
             index = frameTag.to;
         }
@@ -48,13 +48,13 @@ function readJson(json) {
     return animTags;
 }
 
-function loadSheets(anims, sheet, preloader) {
-    anims.forEach(anim =>
-        preloader.load.spritesheet(anim.name, sheet, {
-            frameWidth: anim.width,
-            frameHeight: anim.height,
-            startFrame: anim.from,
-            endFrame: anim.to
+function loadSheets(animTags, sheet, preloader) {
+    animTags.forEach(tag =>
+        preloader.load.spritesheet(tag.name, sheet, {
+            frameWidth: tag.width,
+            frameHeight: tag.height,
+            startFrame: tag.from,
+            endFrame: tag.to
         }));
 }
 
