@@ -58,7 +58,7 @@ function loadSheets(animTags, sheet, preloader) {
         }));
 }
 
-function createAnims(animTags, creator) {
+function createAnims(animTags, creator, nonRepeatingAnims = []) {
     const anims = {}
     animTags.forEach(animTag => {
         const currentAnimTags = animTag.animTags.length ? animTag.animTags : [animTag];
@@ -67,7 +67,7 @@ function createAnims(animTags, creator) {
                 key: currentAnimTag.name,
                 frames: creator.anims.generateFrameNumbers(currentAnimTag.parent, { start: currentAnimTag.from, end: currentAnimTag.to }),
                 frameRate: currentAnimTag.frameRate,
-                repeat: -1
+                repeat: nonRepeatingAnims.includes(currentAnimTag.name) ? 0 : 1 
             }));
     });
     return anims;

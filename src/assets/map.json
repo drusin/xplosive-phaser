@@ -2,10 +2,22 @@
  "infinite":false,
  "layers":[
         {
-         "data":[0, 0, 1, 2, 2, 1, 0, 0, 0, 2, 1, 0, 0, 1, 2, 0, 1, 1, 0, 1, 1, 0, 1, 1, 2, 0, 1, 2, 2, 1, 0, 2, 2, 0, 1, 2, 2, 1, 0, 2, 1, 1, 0, 1, 1, 0, 1, 1, 0, 2, 1, 0, 0, 1, 2, 0, 0, 0, 1, 2, 2, 1, 0, 0],
+         "data":[0, 0, 0, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 2, 0, 0, 2, 2, 0, 0, 2, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 2, 0, 0, 0],
          "height":8,
          "id":5,
-         "name":"map",
+         "name":"undestructible",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":8,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "data":[0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0],
+         "height":8,
+         "id":7,
+         "name":"destructible",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
@@ -13,7 +25,7 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":6,
+ "nextlayerid":8,
  "nextobjectid":1,
  "orientation":"orthogonal",
  "renderorder":"right-down",
@@ -41,7 +53,7 @@
                          "value":true
                         }, 
                         {
-                         "name":"desctuctible",
+                         "name":"destructible",
                          "type":"bool",
                          "value":true
                         }]

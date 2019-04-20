@@ -645,7 +645,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 8, "h": 8 },
     "sourceSize": { "w": 8, "h": 8 },
-    "duration": 333
+    "duration": 400
    },
    "textures 81.aseprite": {
     "frame": { "x": 648, "y": 0, "w": 8, "h": 8 },
@@ -653,7 +653,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 8, "h": 8 },
     "sourceSize": { "w": 8, "h": 8 },
-    "duration": 333
+    "duration": 400
    },
    "textures 82.aseprite": {
     "frame": { "x": 656, "y": 0, "w": 8, "h": 8 },
@@ -661,7 +661,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 8, "h": 8 },
     "sourceSize": { "w": 8, "h": 8 },
-    "duration": 333
+    "duration": 400
    },
    "textures 83.aseprite": {
     "frame": { "x": 664, "y": 0, "w": 8, "h": 8 },
@@ -669,7 +669,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 8, "h": 8 },
     "sourceSize": { "w": 8, "h": 8 },
-    "duration": 333
+    "duration": 400
    },
    "textures 84.aseprite": {
     "frame": { "x": 672, "y": 0, "w": 8, "h": 8 },
@@ -677,7 +677,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 8, "h": 8 },
     "sourceSize": { "w": 8, "h": 8 },
-    "duration": 333
+    "duration": 400
    },
    "textures 85.aseprite": {
     "frame": { "x": 680, "y": 0, "w": 8, "h": 8 },
@@ -685,7 +685,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 8, "h": 8 },
     "sourceSize": { "w": 8, "h": 8 },
-    "duration": 333
+    "duration": 400
    },
    "textures 86.aseprite": {
     "frame": { "x": 688, "y": 0, "w": 8, "h": 8 },
@@ -693,7 +693,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 8, "h": 8 },
     "sourceSize": { "w": 8, "h": 8 },
-    "duration": 333
+    "duration": 400
    },
    "textures 87.aseprite": {
     "frame": { "x": 696, "y": 0, "w": 8, "h": 8 },
@@ -701,7 +701,7 @@
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 8, "h": 8 },
     "sourceSize": { "w": 8, "h": 8 },
-    "duration": 333
+    "duration": 400
    },
    "textures 88.aseprite": {
     "frame": { "x": 704, "y": 0, "w": 8, "h": 8 },
@@ -770,6 +770,7 @@
   "frameTags": [
    { "name": "blue", "from": 0, "to": 19, "direction": "forward" },
    { "name": "idle", "from": 0, "to": 1, "direction": "forward" },
+   { "name": "Loop", "from": 0, "to": 1, "direction": "forward" },
    { "name": "down", "from": 2, "to": 5, "direction": "forward" },
    { "name": "right", "from": 6, "to": 9, "direction": "forward" },
    { "name": "left", "from": 10, "to": 13, "direction": "forward" },

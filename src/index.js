@@ -29,6 +29,6 @@ const config = {
 
 new Phaser.Game(config);
 
-function update() {
-  engine.process();
+function update(time, delta) {
+  engine.process(time, delta);
 }

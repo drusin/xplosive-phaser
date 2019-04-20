@@ -22,11 +22,12 @@ const addSystems = (...newSystems) => {
 	newSystems.forEach(system => systems.add(system));
 };
 
-const process = () => {
+const process = (time, delta) => {
+	Array.from(entities.values()).filter(entity => entity._toRemove).forEach(entity => entities.delete(entity));
 	for (const system of systems.values()) {
 		const componentNames = system.componentNames;
 		const neededEntities = Array.from(entities.values()).filter(entity => componentNames.every(component => entity.componentNames.includes(component)));
-		neededEntities.forEach(entity => system.process(entity));
+		neededEntities.forEach(entity => system.process(entity, delta, time));
 	}
 };
 

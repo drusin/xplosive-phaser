@@ -11,6 +11,8 @@ import textureHelper from './textureHelper';
 import globalState from './globalState';
 import MunitionComponent from './system/MunitionComponent';
 import BombPlantSystem from './system/BombPlantSystem';
+import TimerSystem from './system/TimerSystem';
+import ExplosionSystem from './system/ExplosionSystem';
 
 function createAnimComponent() {
     return new AnimationComponent({
@@ -29,12 +31,22 @@ function createAnimComponent() {
 export default function () {
     globalState.world = this.physics.world;
     globalState.bombs = this.physics.add.group();
-    globalState.anims = textureHelper.createAnims(globalState.animTags, this);
+    globalState.anims = textureHelper.createAnims(globalState.animTags, this, ['bomb']);
+
+    const destroyableWallsGroup = this.physics.add.staticGroup();
 
     const map = this.make.tilemap({ key: 'map' });
     const tileset = map.addTilesetImage('brick-sheet', 'tiles');
-    const walls = map.createStaticLayer('map', tileset, 0, 0);
-    walls.setCollisionByProperty({ collision: true });
+    const undestructibleLayer = map.createStaticLayer('undestructible', tileset, 0, 0);
+    // const destructibleLayer = map.createDynamicLayer('destructible', tileset, 0, 0);
+
+    // const destroyableWalls = walls.filterTiles(tile => tile.properties.destroyable);
+    // destroyableWalls.forEach(wall => {
+    //     map.removeTileAt(wall.x, wall.y);
+    // });
+
+    undestructibleLayer.setCollisionByProperty({ collision: true });
+    // destructibleLayer.setCollisionByProperty({ collision: true });
 
     const player = this.physics.add.sprite(4, 4, 'blue');
     player.setSize(6, 6, true);
@@ -42,7 +54,7 @@ export default function () {
     player.depth = 10;
 
     const cursors = this.input.keyboard.createCursorKeys();
-    this.physics.add.collider(player, walls);
+    this.physics.add.collider(player, undestructibleLayer);
 
     const animComponent = createAnimComponent();
 
@@ -54,6 +66,8 @@ export default function () {
         .addComponent(animComponent);
     engine.addEntities(playerEntity);
     engine.addSystems(new ControlledAnimationSystem(),
+        new TimerSystem(),
+        new ExplosionSystem(),
         new MovementSystem(),
         new ControlSystem(cursors),
         new BombPlantSystem(this));

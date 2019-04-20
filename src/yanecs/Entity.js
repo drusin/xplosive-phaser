@@ -3,6 +3,7 @@ import Component from "./Component";
 export default class Entity {
 	constructor() {
 		this._components = new Map();
+		this._toRemove = false;
 	}
 
 	get components() {
@@ -20,6 +21,10 @@ export default class Entity {
 	addComponent(component) {
 		this._components.set(component.name, component);
 		return this;
+	}
+
+	markForRemoval() {
+		this._toRemove = true;
 	}
 	
 	static fromJson(json) {
