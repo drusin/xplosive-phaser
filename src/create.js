@@ -33,6 +33,8 @@ export default function () {
     globalState.bombs = this.physics.add.group();
     globalState.anims = textureHelper.createAnims(globalState.animTags, this, ['bomb']);
 
+    globalState.world.TILE_BIAS = 8;
+
     const map = this.make.tilemap({ key: 'map' });
     const tileset = map.addTilesetImage('brick-sheet', 'tiles');
     const undestructibleLayer = map.createStaticLayer('undestructible', tileset, 0, 0);
