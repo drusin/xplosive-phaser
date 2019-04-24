@@ -39,12 +39,16 @@ export default function () {
     const tileset = map.addTilesetImage('brick-sheet', 'tiles');
     const undestructibleLayer = map.createStaticLayer('undestructible', tileset, 0, 0);
     undestructibleLayer.setCollisionByProperty({ collision: true });
+    
+    const destructibleLayer = map.createDynamicLayer('destructible', tileset, 0, 0);
+    destructibleLayer.setCollisionByProperty({ collision: true });
 
     const player = this.physics.add.sprite(4, 4, 'blue');
     player.setSize(6, 6, true);
     player.setCollideWorldBounds(true);
     player.depth = 10;
     this.physics.add.collider(player, undestructibleLayer);
+    this.physics.add.collider(player, destructibleLayer);
 
     const cursors = this.input.keyboard.createCursorKeys();
 
@@ -59,7 +63,7 @@ export default function () {
     engine.addEntities(playerEntity);
     engine.addSystems(new ControlledAnimationSystem(),
         new TimerSystem(),
-        new ExplosionSystem(),
+        new ExplosionSystem(this),
         new MovementSystem(),
         new ControlSystem(cursors),
         new BombPlantSystem(this));

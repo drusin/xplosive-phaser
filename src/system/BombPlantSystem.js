@@ -5,8 +5,10 @@ import ControlComponent from "./ControlComponent";
 import SpriteComponent from "./SpriteComponent";
 import globalState from '../globalState';
 import Entity from "../yanecs/Entity";
-import TimerComponent from "./timerComponent";
+import TimerComponent from "./TimerComponent";
 import engine from "../yanecs/engine";
+import BombComponent from "./BombComponent";
+import utils from "../utils";
 
 export default class BombPlantSystem extends System {
     constructor(creator) {
@@ -15,8 +17,8 @@ export default class BombPlantSystem extends System {
     }
 
     _plantBomb(pX, pY, munitionComponent) {
-        const x = Math.round(pX / 8) * 8 + 4;
-        const y = Math.round(pY / 8) * 8 + 4;
+        const x = utils.quantizeCoordinate(pX) + 4;
+        const y = utils.quantizeCoordinate(pY) + 4;
         const bomb = globalState.bombs.create(x, y, 'bomb');
         bomb.setSize(4, 4);
         bomb.setOffset(2);
@@ -26,6 +28,7 @@ export default class BombPlantSystem extends System {
         const bombEntity = new Entity();
         bombEntity.addComponent(new SpriteComponent(bomb))
             .addComponent(new BodyComponent(bomb.body))
+            .addComponent(new BombComponent(munitionComponent))
             .addComponent(new TimerComponent(3000));
         
         engine.addEntities(bombEntity);
@@ -36,6 +39,7 @@ export default class BombPlantSystem extends System {
         const { x, y } = entity.getComponent(BodyComponent.name).body;
         const munitionComponent = entity.getComponent(MunitionComponent.name);
         const { sprite } = entity.getComponent(SpriteComponent.name);
+
         const playerIsOnBomb = globalState.world.overlap(sprite, globalState.bombs.getChildren())
         if (action && munitionComponent.amount && !playerIsOnBomb) {
             this._plantBomb(x, y, munitionComponent, sprite);

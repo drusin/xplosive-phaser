@@ -1,5 +1,5 @@
 import System from "../yanecs/System";
-import TimerComponent from "./timerComponent";
+import TimerComponent from "./TimerComponent";
 
 export default class TimerSystem extends System {
     constructor() {
