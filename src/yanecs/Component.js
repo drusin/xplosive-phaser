@@ -6,6 +6,10 @@ export default class Component {
 	get name() {
 		return this.__name;
 	}
+
+	cleanUp() {
+		//overwrite this for cleanup at removal
+	}
 	
 	static fromJson(json) {
 		const component = new Component();

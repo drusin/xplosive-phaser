@@ -5,6 +5,10 @@ export default class BodyComponent extends Component {
 		super();
 		this.body = body;
 	}
+
+	cleanUp() {
+		this.body.destroy();
+	}
 	
 	toJSON() {
 		return { __name: this.name, message: 'unsupported' };

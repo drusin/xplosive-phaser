@@ -1,31 +1,28 @@
 import System from "../yanecs/System";
 import TimerComponent from "./TimerComponent";
 import BodyComponent from "./BodyComponent";
-import globalState from '../globalState';
 import SpriteComponent from "./SpriteComponent";
 import BombComponent from "./BombComponent";
 import utils from "../utils";
-import Entity from "../yanecs/Entity";
+import FireComponent from "./FireComponent";
+import engine from "../yanecs/engine";
+import globalState from '../globalState';
 
 export default class ExplosionSystem extends System {
-    constructor(creator) {
+    constructor() {
         super(TimerComponent.name, BodyComponent.name, SpriteComponent.name, BombComponent.name);
-        this._creator = creator;
     }
 
     _createFire(bombX, bombY) {
-        const { x, y } = utils.quantizeCoordinates(bombX, bombY);
-        const fireSprite = this._creator.physics.add.sprite(x, y, 'fire');
+        const { x, y } = utils.quantizeCoordinates(bombX, bombY, 4);
+        const fireSprite = globalState.fire.create(x, y, 'fire');
         fireSprite.anims.play('fire.center');
-        // const fire = new Entity()
-            // .addComponent()
-            // .addComponent();
+        engine.addEntities(utils.createFireEntity(fireSprite, new FireComponent(FireComponent.defaultState())));
     }
 
     process(entity) {
         if (entity.getComponent(TimerComponent.name).time < 0) {
             const { x, y } = entity.getComponent(BodyComponent.name).body;
-            entity.getComponent(SpriteComponent.name).sprite.destroy();
             entity.getComponent(BombComponent.name).munitionComponent.amount ++;
             this._createFire(x, y);
             entity.markForRemoval();

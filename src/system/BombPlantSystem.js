@@ -17,8 +17,7 @@ export default class BombPlantSystem extends System {
     }
 
     _plantBomb(pX, pY, munitionComponent) {
-        const x = utils.quantizeCoordinate(pX) + 4;
-        const y = utils.quantizeCoordinate(pY) + 4;
+        const { x, y } = utils.quantizeCoordinates(pX, pY, 4);
         const bomb = globalState.bombs.create(x, y, 'bomb');
         bomb.setSize(4, 4);
         bomb.setOffset(2);

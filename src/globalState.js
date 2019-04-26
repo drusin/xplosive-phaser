@@ -4,6 +4,8 @@ class GlobalState {
         this.animTags = {};
         this.bombs = null;
         this.world = null;
+        this.fire = null;
+        this.walls = null;
     }
 }
 

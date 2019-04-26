@@ -13,6 +13,10 @@ import MunitionComponent from './system/MunitionComponent';
 import BombPlantSystem from './system/BombPlantSystem';
 import TimerSystem from './system/TimerSystem';
 import ExplosionSystem from './system/ExplosionSystem';
+import RemoveAfterTimeOutSystem from './system/RemoveAfterTimeOutSystem';
+import FireSpreadSystem from './system/FireSpreadSystem';
+import WallComponent from './system/WallComponent';
+import DestroyableComponent from './system/DestroyableComponent';
 
 function createAnimComponent() {
     return new AnimationComponent({
@@ -30,23 +34,41 @@ function createAnimComponent() {
 
 export default function () {
     globalState.world = this.physics.world;
-    globalState.bombs = this.physics.add.group();
+    globalState.bombs = this.physics.add.staticGroup();
+    globalState.fire = this.physics.add.staticGroup();
     globalState.anims = textureHelper.createAnims(globalState.animTags, this, ['bomb']);
 
-    globalState.world.TILE_BIAS = 8;
+    globalState.world.TILE_BIAS = 8; // tilemap tiles are 8x8, default bias is for 16x16 and breaks collision
+    globalState.world.OVERLAP_BIAS = 1; // we don't want to automatically resolve overlaps
 
     const map = this.make.tilemap({ key: 'map' });
     const tileset = map.addTilesetImage('brick-sheet', 'tiles');
     const undestructibleLayer = map.createStaticLayer('undestructible', tileset, 0, 0);
     undestructibleLayer.setCollisionByProperty({ collision: true });
+    undestructibleLayer.depth = 5;
+    undestructibleLayer.filterTiles(tile => tile.properties.collision).forEach(tile => {
+        const tileEntity = new Entity()
+            .addComponent(new WallComponent(tile));
+        engine.addEntities(tileEntity);
+    });
+
+    globalState.walls = undestructibleLayer;
     
     const destructibleLayer = map.createDynamicLayer('destructible', tileset, 0, 0);
     destructibleLayer.setCollisionByProperty({ collision: true });
+    destructibleLayer.depth = 5;
+    destructibleLayer.filterTiles(tile => tile.properties.collision).forEach(tile => {
+        const tileEntity = new Entity()
+            .addComponent(new DestroyableComponent())
+            .addComponent(new WallComponent(tile));
+        engine.addEntities(tileEntity);
+    });
 
     const player = this.physics.add.sprite(4, 4, 'blue');
     player.setSize(6, 6, true);
     player.setCollideWorldBounds(true);
     player.depth = 10;
+    this.physics.add.collider(player, globalState.bombs);
     this.physics.add.collider(player, undestructibleLayer);
     this.physics.add.collider(player, destructibleLayer);
 
@@ -63,6 +85,8 @@ export default function () {
     engine.addEntities(playerEntity);
     engine.addSystems(new ControlledAnimationSystem(),
         new TimerSystem(),
+        new FireSpreadSystem(this),
+        new RemoveAfterTimeOutSystem(),
         new ExplosionSystem(this),
         new MovementSystem(),
         new ControlSystem(cursors),

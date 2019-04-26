@@ -5,4 +5,8 @@ export default class SpriteComponent extends Component {
         super();
         this.sprite = sprite;
     }
+
+    cleanUp() {
+        this.sprite.destroy();
+    }
 }

@@ -10,5 +10,4 @@ export default function () {
     this.load.tilemapTiledJSON('map', mapJson);
     globalState.animTags = textureHelper.readJson(texturesJson);
     textureHelper.loadSheets(globalState.animTags, sheet, this);
-    console.log(globalState.animTags);
 }
