@@ -36,6 +36,7 @@ export default function () {
     globalState.world = this.physics.world;
     globalState.bombs = this.physics.add.staticGroup();
     globalState.fire = this.physics.add.staticGroup();
+    globalState.walls = this.physics.add.staticGroup();
     globalState.anims = textureHelper.createAnims(globalState.animTags, this, ['bomb']);
 
     globalState.world.TILE_BIAS = 8; // tilemap tiles are 8x8, default bias is for 16x16 and breaks collision
@@ -47,12 +48,18 @@ export default function () {
     undestructibleLayer.setCollisionByProperty({ collision: true });
     undestructibleLayer.depth = 5;
     undestructibleLayer.filterTiles(tile => tile.properties.collision).forEach(tile => {
-        const tileEntity = new Entity()
-            .addComponent(new WallComponent(tile));
-        engine.addEntities(tileEntity);
+        // const tileEntity = new Entity()
+        //     .addComponent(new WallComponent(tile));
+        // engine.addEntities(tileEntity);
+        console.log(tile.pixelX + " " + tile.pixelY);
+        const sprite = globalState.walls.create(tile.pixelX, tile.pixelY);
+        sprite.setSize(8, 8);
+        sprite.setOffset(16);
+        sprite.visible = false;
     });
 
-    globalState.walls = undestructibleLayer;
+    
+    console.log(globalState.walls);
     
     const destructibleLayer = map.createDynamicLayer('destructible', tileset, 0, 0);
     destructibleLayer.setCollisionByProperty({ collision: true });

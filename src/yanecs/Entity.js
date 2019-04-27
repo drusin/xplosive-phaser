@@ -23,6 +23,11 @@ export default class Entity {
 		return this;
 	}
 
+	removeComponent(componentName) {
+		this._components.delete(componentName);
+		return this;
+	}
+
 	markForRemoval() {
 		this._toRemove = true;
 	}

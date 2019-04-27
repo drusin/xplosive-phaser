@@ -39,6 +39,8 @@ export default class BombPlantSystem extends System {
         const munitionComponent = entity.getComponent(MunitionComponent.name);
         const { sprite } = entity.getComponent(SpriteComponent.name);
 
+        document.getElementById('blubb').innerHTML = munitionComponent.amount;
+
         const playerIsOnBomb = globalState.world.overlap(sprite, globalState.bombs.getChildren())
         if (action && munitionComponent.amount && !playerIsOnBomb) {
             this._plantBomb(x, y, munitionComponent, sprite);

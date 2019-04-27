@@ -14,17 +14,26 @@ export default class FireSpreadSystem extends System {
 
     _createFireSprite(oldX, oldY, spriteName) {
         const { x, y } = utils.quantizeCoordinates(oldX, oldY, 4);
-        const fireSprite = this._creator.physics.add.sprite(x, y, 'fire');
+        const fireSprite = globalState.fire.create(x, y, 'fire');
+        fireSprite.setSize(6, 6, true);
+        fireSprite.setOffset(2, 1);
         fireSprite.anims.play(spriteName);
         return fireSprite;
     }
 
     process(entity) {
+        const fire = entity.getComponent(FireComponent.name);
+        if (!(fire.up || fire.down || fire.left || fire.right)) {
+            return;
+        }
+
         const { body } = entity.getComponent(BodyComponent.name);
         const { x, y } = body;
-        const fire = entity.getComponent(FireComponent.name);
 
-        globalState.world.overlap(globalState.walls, entity.getComponent(SpriteComponent.name).sprite, (left) => console.log(left));
+        globalState.world.overlap(globalState.walls, entity.getComponent(SpriteComponent.name).sprite, () => Object.assign(fire, FireComponent.zeroState()));
+        // console.log(globalState.world.overlap(globalState.walls, entity.getComponent(SpriteComponent.name).sprite, (...args) => console.log(args))); 
+        // console.log(entity.getComponent(SpriteComponent.name).sprite);
+        // console.log(fire);
 
         if (fire.up > 0) {
             const sprite = this._createFireSprite(x, y - 8, fire.up > 1 ? 'fire.vertical' : 'fire.up')
@@ -42,7 +51,6 @@ export default class FireSpreadSystem extends System {
             const sprite = this._createFireSprite(x + 8, y, fire.up > 1 ? 'fire.horizontal' : 'fire.right')
             engine.addEntities(utils.createFireEntity(sprite, new FireComponent(Object.assign(FireComponent.zeroState(), { right: fire.right - 1 }))));
         }
-
 
         Object.assign(fire, FireComponent.zeroState());
     }

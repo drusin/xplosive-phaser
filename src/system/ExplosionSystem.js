@@ -16,6 +16,8 @@ export default class ExplosionSystem extends System {
     _createFire(bombX, bombY) {
         const { x, y } = utils.quantizeCoordinates(bombX, bombY, 4);
         const fireSprite = globalState.fire.create(x, y, 'fire');
+        fireSprite.setSize(6, 6);
+        fireSprite.setOffset(1);
         fireSprite.anims.play('fire.center');
         engine.addEntities(utils.createFireEntity(fireSprite, new FireComponent(FireComponent.defaultState())));
     }
