@@ -1,11 +1,15 @@
 import Component from "../yanecs/Component";
 
 export default class WallComponent extends Component {
-    constructor(tile) {
+    constructor(tile, cleanUp) {
         super();
         this.tile = tile;
-        if (!window.tile) {
-            window.tile = tile;
-        }
+        this._cleanUp = cleanUp;
+    }
+
+    cleanUp() {
+        console.log('destroying tile');
+        this._cleanUp();
+        this.tile.destroy();
     }
 }

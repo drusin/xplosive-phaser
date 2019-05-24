@@ -14,20 +14,21 @@ import BombPlantSystem from './system/BombPlantSystem';
 import TimerSystem from './system/TimerSystem';
 import ExplosionSystem from './system/ExplosionSystem';
 import RemoveAfterTimeOutSystem from './system/RemoveAfterTimeOutSystem';
-import FireSpreadSystem from './system/FireSpreadSystem';
+import FireSystem from './system/FireSystem';
 import WallComponent from './system/WallComponent';
 import DestroyableComponent from './system/DestroyableComponent';
+import WallDestroySystem from './system/WallDestroySystem';
 
 function createAnimComponent() {
     return new AnimationComponent({
         left: globalState.anims['blue.left'],
-        upLeft: globalState.anims['blue.left'],
+        upLeft: globalState.anims['blue.up'],
         up: globalState.anims['blue.up'],
-        upRight: globalState.anims['blue.right'],
+        upRight: globalState.anims['blue.up'],
         right: globalState.anims['blue.right'],
-        downRight: globalState.anims['blue.right'],
+        downRight: globalState.anims['blue.down'],
         down: globalState.anims['blue.down'],
-        downLeft: globalState.anims['blue.left'],
+        downLeft: globalState.anims['blue.down'],
         idle: globalState.anims['blue.idle'],
     });
 }
@@ -43,32 +44,35 @@ export default function () {
     globalState.world.OVERLAP_BIAS = 1; // we don't want to automatically resolve overlaps
 
     const map = this.make.tilemap({ key: 'map' });
+    console.log(map);
     const tileset = map.addTilesetImage('brick-sheet', 'tiles');
     const undestructibleLayer = map.createStaticLayer('undestructible', tileset, 0, 0);
     undestructibleLayer.setCollisionByProperty({ collision: true });
     undestructibleLayer.depth = 5;
     undestructibleLayer.filterTiles(tile => tile.properties.collision).forEach(tile => {
-        // const tileEntity = new Entity()
-        //     .addComponent(new WallComponent(tile));
-        // engine.addEntities(tileEntity);
-        console.log(tile.pixelX + " " + tile.pixelY);
         const sprite = globalState.walls.create(tile.pixelX, tile.pixelY);
         sprite.setSize(8, 8);
         sprite.setOffset(16);
         sprite.visible = false;
+        const wallEntity = new Entity()
+            .addComponent(new SpriteComponent(sprite))
+            .addComponent(new WallComponent(tile));
+        engine.addEntities(wallEntity);
     });
-
-    
-    console.log(globalState.walls);
     
     const destructibleLayer = map.createDynamicLayer('destructible', tileset, 0, 0);
     destructibleLayer.setCollisionByProperty({ collision: true });
     destructibleLayer.depth = 5;
     destructibleLayer.filterTiles(tile => tile.properties.collision).forEach(tile => {
-        const tileEntity = new Entity()
+        const sprite = globalState.walls.create(tile.pixelX, tile.pixelY);
+        sprite.setSize(8, 8);
+        sprite.setOffset(16);
+        sprite.visible = false;
+        const wallEntity = new Entity()
             .addComponent(new DestroyableComponent())
-            .addComponent(new WallComponent(tile));
-        engine.addEntities(tileEntity);
+            .addComponent(new SpriteComponent(sprite))
+            .addComponent(new WallComponent(tile, () => map.removeTileAt(tile.x, tile.y)));
+        engine.addEntities(wallEntity);
     });
 
     const player = this.physics.add.sprite(4, 4, 'blue');
@@ -92,10 +96,11 @@ export default function () {
     engine.addEntities(playerEntity);
     engine.addSystems(new ControlledAnimationSystem(),
         new TimerSystem(),
-        new FireSpreadSystem(this),
+        new FireSystem(this),
         new RemoveAfterTimeOutSystem(),
         new ExplosionSystem(this),
         new MovementSystem(),
         new ControlSystem(cursors),
+        new WallDestroySystem(),
         new BombPlantSystem(this));
 }

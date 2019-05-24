@@ -9,6 +9,7 @@ import TimerComponent from "./TimerComponent";
 import engine from "../yanecs/engine";
 import BombComponent from "./BombComponent";
 import utils from "../utils";
+import DestroyableComponent from "./DestroyableComponent";
 
 export default class BombPlantSystem extends System {
     constructor(creator) {
@@ -28,6 +29,7 @@ export default class BombPlantSystem extends System {
         bombEntity.addComponent(new SpriteComponent(bomb))
             .addComponent(new BodyComponent(bomb.body))
             .addComponent(new BombComponent(munitionComponent))
+            .addComponent(new DestroyableComponent())
             .addComponent(new TimerComponent(3000));
         
         engine.addEntities(bombEntity);
