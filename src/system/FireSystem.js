@@ -1,6 +1,5 @@
 import System from "../yanecs/System";
 import FireComponent from "./FireComponent";
-import BodyComponent from "./BodyComponent";
 import utils from "../utils";
 import engine from "../yanecs/engine";
 import globalState from "../globalState";
@@ -10,14 +9,14 @@ import DestroyableComponent from "./DestroyableComponent";
 
 export default class FireSystem extends System {
     constructor(creator) {
-        super(FireComponent.name, BodyComponent.name);
+        super(FireComponent.name, SpriteComponent.name);
         this._creator = creator;
         this._walls = engine.getEntities(WallComponent.name, SpriteComponent.name);
     }
 
     process(entity) {
         const fire = entity.getComponent(FireComponent.name);
-        const { x, y } = entity.getComponent(BodyComponent.name).body;
+        const { x, y } = entity.getComponent(SpriteComponent.name).sprite.body;
         const { sprite } = entity.getComponent(SpriteComponent.name);
 
         const destroyables = engine.getEntities(SpriteComponent.name, DestroyableComponent.name);

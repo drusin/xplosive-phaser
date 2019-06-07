@@ -1,17 +1,17 @@
 import System from '../yanecs/System';
 import ControlComponent from './ControlComponent';
-import BodyComponent from './BodyComponent';
 import constants from '../constants';
+import SpriteComponent from "./SpriteComponent";
 
 const { SPEED } = constants;
 
 export default class MovementSystem extends System {
     constructor() {
-        super(BodyComponent.name, ControlComponent.name)
+        super(SpriteComponent.name, ControlComponent.name)
     }
 
     process(entity) {
-        const { body } = entity.getComponent(BodyComponent.name);
+        const { body } = entity.getComponent(SpriteComponent.name).sprite;
         const { left, right, up, down } = entity.getComponent(ControlComponent.name);
 
         if (!(left || right)) {

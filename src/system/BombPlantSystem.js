@@ -1,5 +1,4 @@
 import System from "../yanecs/System";
-import BodyComponent from "./BodyComponent";
 import MunitionComponent from "./MunitionComponent";
 import ControlComponent from "./ControlComponent";
 import SpriteComponent from "./SpriteComponent";
@@ -13,7 +12,7 @@ import DestroyableComponent from "./DestroyableComponent";
 
 export default class BombPlantSystem extends System {
     constructor(creator) {
-        super(BodyComponent.name, MunitionComponent.name, ControlComponent.name, SpriteComponent.name);
+        super(MunitionComponent.name, ControlComponent.name, SpriteComponent.name);
         this._creator = creator;
     }
 
@@ -27,7 +26,6 @@ export default class BombPlantSystem extends System {
 
         const bombEntity = new Entity();
         bombEntity.addComponent(new SpriteComponent(bomb))
-            .addComponent(new BodyComponent(bomb.body))
             .addComponent(new BombComponent(munitionComponent))
             .addComponent(new DestroyableComponent())
             .addComponent(new TimerComponent(3000));
@@ -37,13 +35,13 @@ export default class BombPlantSystem extends System {
 
     process(entity) {
         const { action } = entity.getComponent(ControlComponent.name);
-        const { x, y } = entity.getComponent(BodyComponent.name).body;
+        const { x, y } = entity.getComponent(SpriteComponent.name).sprite.body;
         const munitionComponent = entity.getComponent(MunitionComponent.name);
         const { sprite } = entity.getComponent(SpriteComponent.name);
 
         document.getElementById('blubb').innerHTML = munitionComponent.amount;
 
-        const playerIsOnBomb = globalState.world.overlap(sprite, globalState.bombs.getChildren())
+        const playerIsOnBomb = globalState.world.overlap(sprite, globalState.bombs.getChildren());
         if (action && munitionComponent.amount && !playerIsOnBomb) {
             this._plantBomb(x, y, munitionComponent, sprite);
         }

@@ -11,7 +11,7 @@ function readTags(json) {
         }
     });
     return animTags;
-};
+}
 
 function readFps(animTags, json) {
     animTags.forEach(animTag => {
@@ -59,7 +59,7 @@ function loadSheets(animTags, sheet, preloader) {
 }
 
 function createAnims(animTags, creator, nonRepeatingAnims = []) {
-    const anims = {}
+    const anims = {};
     animTags.forEach(animTag => {
         const currentAnimTags = animTag.animTags.length ? animTag.animTags : [animTag];
         currentAnimTags.forEach(currentAnimTag => 

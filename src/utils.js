@@ -1,6 +1,5 @@
 import Entity from "./yanecs/Entity";
 import SpriteComponent from "./system/SpriteComponent";
-import BodyComponent from "./system/BodyComponent";
 import RemoveAfterTimeOutComponent from "./system/RemoveAfterTimeOutComponent";
 import TimerComponent from "./system/TimerComponent";
 
@@ -18,7 +17,6 @@ function quantizeCoordinates(x, y, offset = 0) {
 function createFireEntity(sprite, fireComponent) {
     return new Entity()
     .addComponent(new SpriteComponent(sprite))
-    .addComponent(new BodyComponent(sprite.body))
     .addComponent(fireComponent)
     .addComponent(new RemoveAfterTimeOutComponent())
     .addComponent(new TimerComponent(2000));

@@ -1,6 +1,5 @@
 import System from "../yanecs/System";
 import TimerComponent from "./TimerComponent";
-import BodyComponent from "./BodyComponent";
 import SpriteComponent from "./SpriteComponent";
 import BombComponent from "./BombComponent";
 import utils from "../utils";
@@ -11,7 +10,7 @@ import DestroyableComponent from "./DestroyableComponent";
 
 export default class ExplosionSystem extends System {
     constructor() {
-        super(TimerComponent.name, BodyComponent.name, SpriteComponent.name, BombComponent.name, DestroyableComponent.name);
+        super(TimerComponent.name, SpriteComponent.name, BombComponent.name, DestroyableComponent.name);
     }
 
     _createFire(bombX, bombY) {
@@ -30,7 +29,7 @@ export default class ExplosionSystem extends System {
         }
 
         if (destroyableComponent.destroyed) {
-            const { x, y } = entity.getComponent(BodyComponent.name).body;
+            const { x, y } = entity.getComponent(SpriteComponent.name).sprite.body;
             entity.getComponent(BombComponent.name).munitionComponent.amount ++;
             this._createFire(x, y);
             entity.markForRemoval();

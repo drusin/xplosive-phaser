@@ -2,9 +2,8 @@ import System from "../yanecs/System";
 import WallComponent from "./WallComponent";
 import DestroyableComponent from "./DestroyableComponent";
 import SpriteComponent from "./SpriteComponent";
-import globalState from '../globalState';
-import engine from "../yanecs/engine";
 import TimerComponent from "./TimerComponent";
+import RemoveAfterTimeOutComponent from "./RemoveAfterTimeOutComponent";
 
 export default class WallDestroySystem extends System {
     constructor() {
@@ -19,11 +18,8 @@ export default class WallDestroySystem extends System {
         const timerComponent = entity.getComponent(TimerComponent.name);
         if (!timerComponent) {
             entity.addComponent(new TimerComponent(2000));
+            entity.addComponent(new RemoveAfterTimeOutComponent());
             return;
-        }
-
-        if (timerComponent.time < 0) {
-            entity.markForRemoval();
         }
     }
 }

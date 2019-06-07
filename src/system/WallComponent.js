@@ -8,7 +8,6 @@ export default class WallComponent extends Component {
     }
 
     cleanUp() {
-        console.log('destroying tile');
         this._cleanUp();
         this.tile.destroy();
     }

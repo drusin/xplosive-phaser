@@ -6,7 +6,6 @@ import SpriteComponent from './system/SpriteComponent.js';
 import ControlComponent from './system/ControlComponent.js';
 import MovementSystem from './system/MovementSystem.js';
 import ControlSystem from './system/ControlSystem.js';
-import BodyComponent from "./system/BodyComponent";
 import textureHelper from './textureHelper';
 import globalState from './globalState';
 import MunitionComponent from './system/MunitionComponent';
@@ -90,7 +89,6 @@ export default function () {
     const playerEntity = new Entity()
         .addComponent(new MunitionComponent())
         .addComponent(new SpriteComponent(player))
-        .addComponent(new BodyComponent(player.body))
         .addComponent(new ControlComponent())
         .addComponent(animComponent);
     engine.addEntities(playerEntity);
