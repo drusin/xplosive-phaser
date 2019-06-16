@@ -17,6 +17,7 @@ import FireSystem from './system/FireSystem';
 import WallComponent from './system/WallComponent';
 import DestroyableComponent from './system/DestroyableComponent';
 import WallDestroySystem from './system/WallDestroySystem';
+import KillPlayerSystem from './system/KillPlayerSystem';
 
 function createAnimComponent() {
     return new AnimationComponent({
@@ -29,6 +30,7 @@ function createAnimComponent() {
         down: globalState.anims['blue.down'],
         downLeft: globalState.anims['blue.down'],
         idle: globalState.anims['blue.idle'],
+        dead: globalState.anims['blue.dead']
     });
 }
 
@@ -37,13 +39,12 @@ export default function () {
     globalState.bombs = this.physics.add.staticGroup();
     globalState.fire = this.physics.add.staticGroup();
     globalState.walls = this.physics.add.staticGroup();
-    globalState.anims = textureHelper.createAnims(globalState.animTags, this, ['bomb']);
+    globalState.anims = textureHelper.createAnims(globalState.animTags, this, ['bomb', 'dead']);
 
     globalState.world.TILE_BIAS = 8; // tilemap tiles are 8x8, default bias is for 16x16 and breaks collision
     globalState.world.OVERLAP_BIAS = 1; // we don't want to automatically resolve overlaps
 
     const map = this.make.tilemap({ key: 'map' });
-    console.log(map);
     const tileset = map.addTilesetImage('brick-sheet', 'tiles');
     const undestructibleLayer = map.createStaticLayer('undestructible', tileset, 0, 0);
     undestructibleLayer.setCollisionByProperty({ collision: true });
@@ -90,6 +91,7 @@ export default function () {
         .addComponent(new MunitionComponent())
         .addComponent(new SpriteComponent(player))
         .addComponent(new ControlComponent())
+        .addComponent(new DestroyableComponent())
         .addComponent(animComponent);
     engine.addEntities(playerEntity);
     engine.addSystems(new ControlledAnimationSystem(),
@@ -100,5 +102,6 @@ export default function () {
         new MovementSystem(),
         new ControlSystem(cursors),
         new WallDestroySystem(),
+        new KillPlayerSystem(),
         new BombPlantSystem(this));
 }

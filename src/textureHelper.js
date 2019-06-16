@@ -67,7 +67,7 @@ function createAnims(animTags, creator, nonRepeatingAnims = []) {
                 key: currentAnimTag.name,
                 frames: creator.anims.generateFrameNumbers(currentAnimTag.parent, { start: currentAnimTag.from, end: currentAnimTag.to }),
                 frameRate: currentAnimTag.frameRate,
-                repeat: nonRepeatingAnims.includes(currentAnimTag.name) ? 0 : 1 
+                repeat: nonRepeatingAnims.filter(nonRepeating => currentAnimTag.name.includes(nonRepeating)).length ? 0 : 1 
             }));
     });
     return anims;
