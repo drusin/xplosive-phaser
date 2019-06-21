@@ -1,35 +1,13 @@
-import Phaser from 'phaser';
-import engine from './yanecs/engine';
-import preload from './preload';
-import create from './create';
+import './menu/simple-menu';
 
-const config = {
-	type: Phaser.AUTO,
-	pixelArt: true,
-	scale: {
-		parent: 'xplosive',
-		mode: Phaser.Scale.FIT,
-		width: 64,
-		height: 64,
-		max: {
-			width: 640,
-			height: 640
-		}
-	},
-	backgroundColor: '#cccccc',
-	scene: { 
-		preload,
-		create,
-		update
-	},
-	physics: {
-		default: 'arcade',
-		arcade: { debug: false }
-	}
-};
+const elements = [
+	{ text: 'Local Game', callback: () => alert('Local!')},
+	{ text: 'Network Game', callback: () => alert('Network!'), disabled: true},
+	{ text: 'Options', callback: () => alert('Options!')}
+	];
 
-new Phaser.Game(config);
+const menu = document.createElement('simple-menu');
+document.getElementById('menu').appendChild(menu);
+menu.elements = elements;
 
-function update(time, delta) {
-	engine.process(time, delta);
-}
+console.log(window.matchMedia('only screen'));
