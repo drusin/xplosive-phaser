@@ -20,7 +20,8 @@ const config = {
 	scene: { 
 		preload,
 		create,
-		update },
+		update
+	},
 	physics: {
 		default: 'arcade',
 		arcade: { debug: false }

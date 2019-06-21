@@ -7,6 +7,7 @@ import FireComponent from "./FireComponent";
 import engine from "../../yanecs/engine";
 import globalState from '../../globalState';
 import DestroyableComponent from "./DestroyableComponent";
+import createFire from "../entity-creators/createFire";
 
 export default class ExplosionSystem extends System {
     constructor() {
@@ -19,7 +20,7 @@ export default class ExplosionSystem extends System {
         fireSprite.setSize(6, 6);
         fireSprite.setOffset(1);
         fireSprite.anims.play('fire.center');
-        engine.addEntities(utils.createFireEntity(fireSprite, new FireComponent(FireComponent.defaultState())));
+        engine.addEntities(createFire(fireSprite, FireComponent.defaultState()));
     }
 
     process(entity) {

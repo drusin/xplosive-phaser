@@ -1,23 +1,19 @@
 import engine from './yanecs/engine';
 import AnimationComponent from './system/graphics/AnimationComponent.js';
 import ControlledAnimationSystem from './system/graphics/ControlledAnimationSystem.js';
-import Entity from './yanecs/Entity.js';
-import SpriteComponent from './system/graphics/SpriteComponent.js';
-import ControlComponent from './system/movement/ControlComponent.js';
 import MovementSystem from './system/movement/MovementSystem.js';
 import ControlSystem from './system/movement/ControlSystem.js';
 import textureHelper from './textureHelper';
 import globalState from './globalState';
-import MunitionComponent from './system/bombs/MunitionComponent';
 import BombPlantSystem from './system/bombs/BombPlantSystem';
 import TimerSystem from './system/TimerSystem';
 import ExplosionSystem from './system/bombs/ExplosionSystem';
 import RemoveAfterTimeOutSystem from './system/RemoveAfterTimeOutSystem';
 import FireSystem from './system/bombs/FireSystem';
-import WallComponent from './system/bombs/WallComponent';
-import DestroyableComponent from './system/bombs/DestroyableComponent';
 import WallDestroySystem from './system/bombs/WallDestroySystem';
 import KillPlayerSystem from './system/bombs/KillPlayerSystem';
+import createPlayer from "./system/entity-creators/createPlayer";
+import createWall from "./system/entity-creators/createWall";
 
 function createAnimComponent() {
     return new AnimationComponent({
@@ -54,10 +50,7 @@ export default function () {
         sprite.setSize(8, 8);
         sprite.setOffset(16);
         sprite.visible = false;
-        const wallEntity = new Entity()
-            .addComponent(new SpriteComponent(sprite))
-            .addComponent(new WallComponent(tile));
-        engine.addEntities(wallEntity);
+        engine.addEntities(createWall(sprite, tile));
     });
     
     const destructibleLayer = map.createDynamicLayer('destructible', tileset, 0, 0);
@@ -68,11 +61,7 @@ export default function () {
         sprite.setSize(8, 8);
         sprite.setOffset(16);
         sprite.visible = false;
-        const wallEntity = new Entity()
-            .addComponent(new DestroyableComponent())
-            .addComponent(new SpriteComponent(sprite))
-            .addComponent(new WallComponent(tile, () => map.removeTileAt(tile.x, tile.y)));
-        engine.addEntities(wallEntity);
+        engine.addEntities(createWall(sprite, tile, true, () => map.removeTileAt(tile.x, tile.y)));
     });
 
     const player = this.physics.add.sprite(4, 4, 'blue');
@@ -87,13 +76,7 @@ export default function () {
 
     const animComponent = createAnimComponent();
 
-    const playerEntity = new Entity()
-        .addComponent(new MunitionComponent())
-        .addComponent(new SpriteComponent(player))
-        .addComponent(new ControlComponent())
-        .addComponent(new DestroyableComponent())
-        .addComponent(animComponent);
-    engine.addEntities(playerEntity);
+    engine.addEntities(createPlayer(player, animComponent));
     engine.addSystems(new ControlledAnimationSystem(),
         new TimerSystem(),
         new FireSystem(this),
@@ -103,5 +86,5 @@ export default function () {
         new ControlSystem(cursors),
         new WallDestroySystem(),
         new KillPlayerSystem(),
-        new BombPlantSystem(this));
+        new BombPlantSystem());
 }

@@ -3,17 +3,13 @@ import MunitionComponent from "./MunitionComponent";
 import ControlComponent from "../movement/ControlComponent";
 import SpriteComponent from "../graphics/SpriteComponent";
 import globalState from '../../globalState';
-import Entity from "../../yanecs/Entity";
-import TimerComponent from "../TimerComponent";
 import engine from "../../yanecs/engine";
-import BombComponent from "./BombComponent";
 import utils from "../../utils";
-import DestroyableComponent from "./DestroyableComponent";
+import createBomb from "../entity-creators/createBomb";
 
 export default class BombPlantSystem extends System {
-    constructor(creator) {
+    constructor() {
         super(MunitionComponent.name, ControlComponent.name, SpriteComponent.name);
-        this._creator = creator;
     }
 
     _plantBomb(pX, pY, munitionComponent) {
@@ -24,13 +20,7 @@ export default class BombPlantSystem extends System {
         bomb.anims.play(globalState.anims.bomb);
         munitionComponent.amount--;
 
-        const bombEntity = new Entity();
-        bombEntity.addComponent(new SpriteComponent(bomb))
-            .addComponent(new BombComponent(munitionComponent))
-            .addComponent(new DestroyableComponent())
-            .addComponent(new TimerComponent(3000));
-        
-        engine.addEntities(bombEntity);
+        engine.addEntities(createBomb(bomb, munitionComponent));
     }
 
     process(entity) {

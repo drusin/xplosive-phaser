@@ -6,6 +6,7 @@ import globalState from "../../globalState";
 import SpriteComponent from "../graphics/SpriteComponent";
 import WallComponent from "./WallComponent";
 import DestroyableComponent from "./DestroyableComponent";
+import createFire from "../entity-creators/createFire";
 
 export default class FireSystem extends System {
     constructor(creator) {
@@ -36,19 +37,19 @@ export default class FireSystem extends System {
     _spreadFire(fire, x, y) {
         if (fire.up > 0) {
             const sprite = this._createFireSprite(x, y - 8, fire.up > 1 ? 'fire.vertical' : 'fire.up');
-            engine.addEntities(utils.createFireEntity(sprite, new FireComponent(Object.assign(FireComponent.zeroState(), { up: fire.up - 1 }))));
+            engine.addEntities(createFire(sprite, Object.assign(FireComponent.zeroState(), { up: fire.up - 1 })));
         }
         if (fire.down > 0) {
             const sprite = this._createFireSprite(x, y + 8, fire.down > 1 ? 'fire.vertical' : 'fire.down');
-            engine.addEntities(utils.createFireEntity(sprite, new FireComponent(Object.assign(FireComponent.zeroState(), { down: fire.down - 1 }))));
+            engine.addEntities(createFire(sprite, Object.assign(FireComponent.zeroState(), { down: fire.down - 1 })));
         }
         if (fire.left > 0) {
             const sprite = this._createFireSprite(x - 8, y, fire.left > 1 ? 'fire.horizontal' : 'fire.left');
-            engine.addEntities(utils.createFireEntity(sprite, new FireComponent(Object.assign(FireComponent.zeroState(), { left: fire.left - 1 }))));
+            engine.addEntities(createFire(sprite, Object.assign(FireComponent.zeroState(), { left: fire.left - 1 })));
         }
         if (fire.right > 0) {
             const sprite = this._createFireSprite(x + 8, y, fire.up > 1 ? 'fire.horizontal' : 'fire.right');
-            engine.addEntities(utils.createFireEntity(sprite, new FireComponent(Object.assign(FireComponent.zeroState(), { right: fire.right - 1 }))));
+            engine.addEntities(createFire(sprite, Object.assign(FireComponent.zeroState(), { right: fire.right - 1 })));
         }
         Object.assign(fire, FireComponent.zeroState());
     }
