@@ -10,10 +10,4 @@ export default class Component {
 	cleanUp() {
 		//overwrite this for cleanup at removal
 	}
-	
-	static fromJson(json) {
-		const component = new Component();
-		Object.keys(json).forEach(key => component[key] = json[key]);
-		return component;
-	}
 }
