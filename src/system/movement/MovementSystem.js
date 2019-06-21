@@ -14,18 +14,18 @@ export default class MovementSystem extends System {
         const { body } = entity.getComponent(SpriteComponent.name).sprite;
         const { left, right, up, down } = entity.getComponent(ControlComponent.name);
 
-        if (!(left || right)) {
+        if (!(left.isDown || right.isDown)) {
             body.setVelocityX(0);
         }
         else {
-            body.setVelocityX(left ? -SPEED : SPEED);
+            body.setVelocityX(left.isDown ? -SPEED : SPEED);
         }
 
-        if (!(up || down)) {
+        if (!(up.isDown || down.isDown)) {
             body.setVelocityY(0);
         }
         else {
-            body.setVelocityY(up ? -SPEED : SPEED);
+            body.setVelocityY(up.isDown ? -SPEED : SPEED);
         }
     }
 }

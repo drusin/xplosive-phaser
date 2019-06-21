@@ -1,8 +1,6 @@
 import engine from './yanecs/engine';
-import AnimationComponent from './system/graphics/AnimationComponent.js';
 import ControlledAnimationSystem from './system/graphics/ControlledAnimationSystem.js';
 import MovementSystem from './system/movement/MovementSystem.js';
-import ControlSystem from './system/movement/ControlSystem.js';
 import textureHelper from './textureHelper';
 import globalState from './globalState';
 import BombPlantSystem from './system/bombs/BombPlantSystem';
@@ -14,21 +12,6 @@ import WallDestroySystem from './system/bombs/WallDestroySystem';
 import KillPlayerSystem from './system/bombs/KillPlayerSystem';
 import createPlayer from "./system/entity-creators/createPlayer";
 import createWall from "./system/entity-creators/createWall";
-
-function createAnimComponent() {
-    return new AnimationComponent({
-        left: globalState.anims['blue.left'],
-        upLeft: globalState.anims['blue.up'],
-        up: globalState.anims['blue.up'],
-        upRight: globalState.anims['blue.up'],
-        right: globalState.anims['blue.right'],
-        downRight: globalState.anims['blue.down'],
-        down: globalState.anims['blue.down'],
-        downLeft: globalState.anims['blue.down'],
-        idle: globalState.anims['blue.idle'],
-        dead: globalState.anims['blue.dead']
-    });
-}
 
 export default function () {
     globalState.world = this.physics.world;
@@ -63,27 +46,39 @@ export default function () {
         sprite.visible = false;
         engine.addEntities(createWall(sprite, tile, true, () => map.removeTileAt(tile.x, tile.y)));
     });
+    
+    globalState.players = this.physics.add.group();
+    this.physics.add.collider(globalState.players, globalState.bombs);
+    this.physics.add.collider(globalState.players, undestructibleLayer);
+    this.physics.add.collider(globalState.players, destructibleLayer);
 
-    const player = this.physics.add.sprite(4, 4, 'blue');
-    player.setSize(6, 6, true);
-    player.setCollideWorldBounds(true);
-    player.depth = 10;
-    this.physics.add.collider(player, globalState.bombs);
-    this.physics.add.collider(player, undestructibleLayer);
-    this.physics.add.collider(player, destructibleLayer);
+    const playerOneKeys = this.input.keyboard.addKeys({
+        up: 'UP',
+        down: 'DOWN',
+        left: 'LEFT',
+        right: 'RIGHT',
+        action: 'NUMPAD_ZERO'
+    });
+    
+    const playerTwoKeys = this.input.keyboard.addKeys({
+        up: 'W',
+        down: 'S',
+        left: 'A',
+        right: 'D',
+        action: 'SPACE'
+    });
 
-    const cursors = this.input.keyboard.createCursorKeys();
-
-    const animComponent = createAnimComponent();
-
-    engine.addEntities(createPlayer(player, animComponent));
+    engine.addEntities(
+        createPlayer(4, 4, 'blue', playerOneKeys),
+        createPlayer(60, 4, 'red', playerTwoKeys)
+    );
+    
     engine.addSystems(new ControlledAnimationSystem(),
         new TimerSystem(),
         new FireSystem(this),
         new RemoveAfterTimeOutSystem(),
         new ExplosionSystem(this),
         new MovementSystem(),
-        new ControlSystem(cursors),
         new WallDestroySystem(),
         new KillPlayerSystem(),
         new BombPlantSystem());

@@ -6,6 +6,7 @@ class GlobalState {
         this.world = null;
         this.fire = null;
         this.walls = null;
+        this.players = null;
     }
 }
 

@@ -1,12 +1,8 @@
 import Component from "../../yanecs/Component";
 
 export default class ControlComponent extends Component {
-    constructor() {
+    constructor({ up, down, left, right, action }) {
         super();
-        this.up = false;
-        this.down = false;
-        this.left = false;
-        this.right = false;
-        this.action = false;
+        Object.assign(this, arguments[0]);
     }
 }
