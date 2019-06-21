@@ -1,4 +1,4 @@
-import System from "../yanecs/System";
+import System from "../../yanecs/System";
 import ControlComponent from "./ControlComponent";
 
 export default class ControlSystem extends System {

@@ -1,9 +1,9 @@
-import System from "../yanecs/System";
+import System from "../../yanecs/System";
 import WallComponent from "./WallComponent";
 import DestroyableComponent from "./DestroyableComponent";
-import SpriteComponent from "./SpriteComponent";
-import TimerComponent from "./TimerComponent";
-import RemoveAfterTimeOutComponent from "./RemoveAfterTimeOutComponent";
+import SpriteComponent from "../graphics/SpriteComponent";
+import TimerComponent from "../TimerComponent";
+import RemoveAfterTimeOutComponent from "../RemoveAfterTimeOutComponent";
 
 export default class WallDestroySystem extends System {
     constructor() {

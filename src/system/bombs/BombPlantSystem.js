@@ -1,13 +1,13 @@
-import System from "../yanecs/System";
+import System from "../../yanecs/System";
 import MunitionComponent from "./MunitionComponent";
-import ControlComponent from "./ControlComponent";
-import SpriteComponent from "./SpriteComponent";
-import globalState from '../globalState';
-import Entity from "../yanecs/Entity";
-import TimerComponent from "./TimerComponent";
-import engine from "../yanecs/engine";
+import ControlComponent from "../movement/ControlComponent";
+import SpriteComponent from "../graphics/SpriteComponent";
+import globalState from '../../globalState';
+import Entity from "../../yanecs/Entity";
+import TimerComponent from "../TimerComponent";
+import engine from "../../yanecs/engine";
 import BombComponent from "./BombComponent";
-import utils from "../utils";
+import utils from "../../utils";
 import DestroyableComponent from "./DestroyableComponent";
 
 export default class BombPlantSystem extends System {

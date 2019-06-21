@@ -1,9 +1,9 @@
-import System from "../yanecs/System";
+import System from "../../yanecs/System";
 import FireComponent from "./FireComponent";
-import utils from "../utils";
-import engine from "../yanecs/engine";
-import globalState from "../globalState";
-import SpriteComponent from "./SpriteComponent";
+import utils from "../../utils";
+import engine from "../../yanecs/engine";
+import globalState from "../../globalState";
+import SpriteComponent from "../graphics/SpriteComponent";
 import WallComponent from "./WallComponent";
 import DestroyableComponent from "./DestroyableComponent";
 

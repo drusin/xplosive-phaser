@@ -1,23 +1,23 @@
 import engine from './yanecs/engine';
-import AnimationComponent from './system/AnimationComponent.js';
-import ControlledAnimationSystem from './system/ControlledAnimationSystem.js';
+import AnimationComponent from './system/graphics/AnimationComponent.js';
+import ControlledAnimationSystem from './system/graphics/ControlledAnimationSystem.js';
 import Entity from './yanecs/Entity.js';
-import SpriteComponent from './system/SpriteComponent.js';
-import ControlComponent from './system/ControlComponent.js';
-import MovementSystem from './system/MovementSystem.js';
-import ControlSystem from './system/ControlSystem.js';
+import SpriteComponent from './system/graphics/SpriteComponent.js';
+import ControlComponent from './system/movement/ControlComponent.js';
+import MovementSystem from './system/movement/MovementSystem.js';
+import ControlSystem from './system/movement/ControlSystem.js';
 import textureHelper from './textureHelper';
 import globalState from './globalState';
-import MunitionComponent from './system/MunitionComponent';
-import BombPlantSystem from './system/BombPlantSystem';
+import MunitionComponent from './system/bombs/MunitionComponent';
+import BombPlantSystem from './system/bombs/BombPlantSystem';
 import TimerSystem from './system/TimerSystem';
-import ExplosionSystem from './system/ExplosionSystem';
+import ExplosionSystem from './system/bombs/ExplosionSystem';
 import RemoveAfterTimeOutSystem from './system/RemoveAfterTimeOutSystem';
-import FireSystem from './system/FireSystem';
-import WallComponent from './system/WallComponent';
-import DestroyableComponent from './system/DestroyableComponent';
-import WallDestroySystem from './system/WallDestroySystem';
-import KillPlayerSystem from './system/KillPlayerSystem';
+import FireSystem from './system/bombs/FireSystem';
+import WallComponent from './system/bombs/WallComponent';
+import DestroyableComponent from './system/bombs/DestroyableComponent';
+import WallDestroySystem from './system/bombs/WallDestroySystem';
+import KillPlayerSystem from './system/bombs/KillPlayerSystem';
 
 function createAnimComponent() {
     return new AnimationComponent({

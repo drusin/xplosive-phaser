@@ -1,11 +1,11 @@
-import System from "../yanecs/System";
-import TimerComponent from "./TimerComponent";
-import SpriteComponent from "./SpriteComponent";
+import System from "../../yanecs/System";
+import TimerComponent from "../TimerComponent";
+import SpriteComponent from "../graphics/SpriteComponent";
 import BombComponent from "./BombComponent";
-import utils from "../utils";
+import utils from "../../utils";
 import FireComponent from "./FireComponent";
-import engine from "../yanecs/engine";
-import globalState from '../globalState';
+import engine from "../../yanecs/engine";
+import globalState from '../../globalState';
 import DestroyableComponent from "./DestroyableComponent";
 
 export default class ExplosionSystem extends System {

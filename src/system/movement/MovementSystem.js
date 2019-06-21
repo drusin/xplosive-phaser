@@ -1,7 +1,7 @@
-import System from '../yanecs/System';
+import System from '../../yanecs/System';
 import ControlComponent from './ControlComponent';
-import constants from '../constants';
-import SpriteComponent from "./SpriteComponent";
+import constants from '../../constants';
+import SpriteComponent from "../graphics/SpriteComponent";
 
 const { SPEED } = constants;
 
