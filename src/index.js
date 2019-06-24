@@ -1,7 +1,10 @@
 import './menu/simple-menu';
 
+import GAME from './phaser';
+import constants from './phaser/constants';
+
 const elements = [
-	{ text: 'Local Game', callback: () => alert('Local!')},
+	{ text: 'Local Game', callback: () => GAME.scene.start(constants.SCENES.GAME) },
 	{ text: 'Network Game', callback: () => alert('Network!'), disabled: true},
 	{ text: 'Options', callback: () => alert('Options!')}
 	];

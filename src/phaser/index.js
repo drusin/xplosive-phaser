@@ -1,7 +1,6 @@
 import Phaser from 'phaser';
-import engine from '../yanecs/engine';
-import preload from './preload';
-import create from './create';
+import MenuScene from './MenuScene';
+import GameScene from './GameScene';
 
 const config = {
 	type: Phaser.AUTO,
@@ -17,21 +16,13 @@ const config = {
 		}
 	},
 	backgroundColor: '#cccccc',
-	scene: { 
-		preload,
-		create,
-		update
-	},
+	scene: [MenuScene, GameScene],
 	physics: {
 		default: 'arcade',
 		arcade: { debug: false }
 	}
 };
 
-function update(time, delta) {
-	engine.process(time, delta);
-}
+const GAME = new Phaser.Game(config);
 
-export function start () {
-	new Phaser.Game(config);
-}
+export default GAME;
