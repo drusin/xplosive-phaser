@@ -10,7 +10,14 @@ const elements = [
 	];
 
 const menu = document.createElement('simple-menu');
-document.getElementById('menu').appendChild(menu);
+const menuContainer = document.getElementById('menu');
+menuContainer.appendChild(menu);
 menu.elements = elements;
 
-console.log(window.matchMedia('only screen'));
+
+GAME.scale.on('resize', (gameSize, baseSize, displaySize) => resizeMenu(displaySize.width, displaySize.height));
+
+function resizeMenu(width, height) {
+	menuContainer.style.width = width + 'px';
+	menuContainer.style.height = height + 'px';
+}
