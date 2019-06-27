@@ -15,7 +15,6 @@ const config = {
 			height: 640
 		}
 	},
-	backgroundColor: '#cccccc',
 	scene: [MenuScene, GameScene],
 	physics: {
 		default: 'arcade',

@@ -8,6 +8,7 @@ export default class GameScene extends Phaser.Scene {
     }
 
     create() {
+        this.cameras.main.setBackgroundColor('#cccccc');
         create.bind(this)();
     }
 
