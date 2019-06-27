@@ -52,22 +52,24 @@ export default function () {
     this.physics.add.collider(globalState.players, undestructibleLayer);
     this.physics.add.collider(globalState.players, destructibleLayer);
 
+    const savedPlayerOneKeys = JSON.parse(window.localStorage.playerOneKeys);
     const playerOneKeys = this.input.keyboard.addKeys({
-        up: 'UP',
-        down: 'DOWN',
-        left: 'LEFT',
-        right: 'RIGHT',
-        action: 'NUMPAD_ZERO'
-    });
-    
-    const playerTwoKeys = this.input.keyboard.addKeys({
-        up: 'W',
-        down: 'S',
-        left: 'A',
-        right: 'D',
-        action: 'SPACE'
+        up: savedPlayerOneKeys.up,
+        down: savedPlayerOneKeys.down,
+        left: savedPlayerOneKeys.left,
+        right: savedPlayerOneKeys.right,
+        action: savedPlayerOneKeys.action
     });
 
+    const savedPlayerTwoKeys = JSON.parse(window.localStorage.playerTwoKeys);
+    const playerTwoKeys = this.input.keyboard.addKeys({
+        up: savedPlayerTwoKeys.up,
+        down: savedPlayerTwoKeys.down,
+        left: savedPlayerTwoKeys.left,
+        right: savedPlayerTwoKeys.right,
+        action: savedPlayerTwoKeys.action
+    });
+    
     engine.addEntities(
         createPlayer(4, 4, 'blue', playerOneKeys),
         createPlayer(60, 4, 'red', playerTwoKeys)

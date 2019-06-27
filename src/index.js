@@ -13,7 +13,7 @@ const elements = [
 		GAME.scene.start(constants.SCENES.GAME);
 	} },
 	{ text: 'Network Game', callback: () => alert('Network!'), disabled: true},
-	{ text: 'Options', callback: () => alert('Options!')}
+	{ text: 'Settings', callback: () => alert('Settings!')}
 ];
 
 menu.elements = elements;
@@ -23,4 +23,24 @@ GAME.scale.on('resize', (gameSize, baseSize, displaySize) => resizeMenu(displayS
 function resizeMenu(width, height) {
 	menuContainer.style.width = width + 'px';
 	menuContainer.style.height = height + 'px';
+}
+
+if (!window.localStorage.playerOneKeys) {
+	window.localStorage.playerOneKeys = JSON.stringify({
+		up: 'W',
+		down: 'S',
+		left: 'A',
+		right: 'D',
+		action: 'SPACE'
+	});
+}
+
+if (!window.localStorage.playerTwoKeys) {
+	window.localStorage.playerTwoKeys = JSON.stringify({
+		up: 'UP',
+		down: 'DOWN',
+		left: 'LEFT',
+		right: 'RIGHT',
+		action: 'ALT'
+	});
 }

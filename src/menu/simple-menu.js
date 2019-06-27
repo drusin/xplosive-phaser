@@ -1,14 +1,36 @@
 const template = document.createElement('template');
 template.innerHTML = `
-	<style>
-		nav {
-			list-style-type: none;
-			margin: 0;
-			padding: 0;
-		}
-	</style>
+<style>
+	@import '../global-style.css';
+</style>
+<style>
+	nav {
+		list-style-type: none;
+		padding: 0;
+		margin: auto;
+		margin-top: 40%;
+		width: 300px;
+	}
 
-	<nav></nav>
+	button {
+		width: 100%;
+		background-color: Transparent;
+		margin: 10px;
+		padding: 10px;
+		border-style: dashed;
+	}
+
+	button:enabled {
+		color: white;
+	}
+
+	button:focus {
+		border-style: solid;
+		outline: 0;
+	}
+</style>
+
+<nav></nav>
 `;
 
 class SimpleMenu extends HTMLElement {
