@@ -9,9 +9,8 @@ import DestroyableComponent from "./DestroyableComponent";
 import createFire from "../entity-creators/createFire";
 
 export default class FireSystem extends System {
-    constructor(creator) {
+    constructor() {
         super(FireComponent.name, SpriteComponent.name);
-        this._creator = creator;
         this._walls = engine.getEntities(WallComponent.name, SpriteComponent.name);
     }
 

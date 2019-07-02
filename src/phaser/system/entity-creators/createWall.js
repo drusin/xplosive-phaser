@@ -3,10 +3,10 @@ import SpriteComponent from "../graphics/SpriteComponent";
 import WallComponent from "../bombs/WallComponent";
 import DestroyableComponent from "../bombs/DestroyableComponent";
 
-export default function (sprite, tile, destroyable = false, cleanUpCallback = () => {}) {
+export default function(sprite, tile, destroyable = false) {
 	const entity =  new Entity()
 		.addComponent(new SpriteComponent(sprite))
-		.addComponent(new WallComponent(tile, cleanUpCallback));
+		.addComponent(new WallComponent(tile));
 	if (destroyable) {
 		entity.addComponent(new DestroyableComponent());
 	}
