@@ -6,6 +6,7 @@ import DestroyableComponent from "../bombs/DestroyableComponent";
 import AnimationComponent from "../graphics/AnimationComponent";
 import globalState from "../../globalState";
 import utils from "../../utils";
+import StateComponent from "../movement/StateComponent";
 
 export default function (x, y, spriteName, controlKeys) {
 	const sprite = globalState.players.create(x, y, spriteName);
@@ -18,5 +19,6 @@ export default function (x, y, spriteName, controlKeys) {
 		.addComponent(new SpriteComponent(sprite))
 		.addComponent(new ControlComponent(controlKeys))
 		.addComponent(new DestroyableComponent())
+		.addComponent(new StateComponent())
 		.addComponent(new AnimationComponent(anims));
 };

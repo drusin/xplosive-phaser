@@ -1,14 +1,14 @@
 import System from "../../../../yanecs/System";
 import ControlComponent from "../movement/ControlComponent";
 import SpriteComponent from "../graphics/SpriteComponent";
-import AnimationComponent from "../graphics/AnimationComponent";
 import DestroyableComponent from "./DestroyableComponent";
 import RemoveAfterTimeOutComponent from "../RemoveAfterTimeOutComponent";
 import TimerComponent from "../TimerComponent";
+import StateComponent from "../movement/StateComponent";
 
 export default class KillPlayerSystem extends System {
     constructor () {
-        super (ControlComponent.name, SpriteComponent.name, AnimationComponent.name, DestroyableComponent.name);
+        super (ControlComponent.name, SpriteComponent.name, DestroyableComponent.name, StateComponent.name);
     }
 
     process(entity) {
@@ -19,7 +19,7 @@ export default class KillPlayerSystem extends System {
 
         const { sprite } = entity.getComponent(SpriteComponent.name);
         sprite.body.setVelocity(0, 0);
-        sprite.anims.play(entity.getComponent(AnimationComponent.name).dead);
+        entity.getComponent(StateComponent.name).dead = true;
         entity.removeComponent(ControlComponent.name)
             .addComponent(new TimerComponent(3000))
             .addComponent(new RemoveAfterTimeOutComponent());

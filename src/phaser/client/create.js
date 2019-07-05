@@ -1,5 +1,5 @@
 import engine from '../../yanecs/engine';
-import ControlledAnimationSystem from './system/graphics/ControlledAnimationSystem.js';
+import AnimationSystem from './system/graphics/AnimationSystem.js';
 import MovementSystem from './system/movement/MovementSystem.js';
 import textureHelper from './textureHelper';
 import globalState from './globalState';
@@ -75,7 +75,8 @@ export default function () {
         createPlayer(60, 4, 'red', playerTwoKeys)
     );
     
-    engine.addSystems(new ControlledAnimationSystem(),
+    engine.addSystems(
+        new AnimationSystem(),
         new TimerSystem(),
         new FireSystem(),
         new RemoveAfterTimeOutSystem(),
@@ -83,5 +84,6 @@ export default function () {
         new MovementSystem(),
         new WallDestroySystem(),
         new KillPlayerSystem(),
-        new BombPlantSystem());
+        new BombPlantSystem()
+    );
 }

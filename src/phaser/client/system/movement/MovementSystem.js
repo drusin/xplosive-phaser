@@ -2,12 +2,13 @@ import System from '../../../../yanecs/System';
 import ControlComponent from './ControlComponent';
 import constants from '../../constants';
 import SpriteComponent from "../graphics/SpriteComponent";
+import StateComponent from "./StateComponent";
 
 const { SPEED } = constants;
 
 export default class MovementSystem extends System {
     constructor() {
-        super(SpriteComponent.name, ControlComponent.name)
+        super(SpriteComponent.name, ControlComponent.name, StateComponent.name)
     }
 
     process(entity) {
@@ -27,5 +28,11 @@ export default class MovementSystem extends System {
         else {
             body.setVelocityY(up.isDown ? -SPEED : SPEED);
         }
+        
+        const state = entity.getComponent(StateComponent.name);
+        state.up = up.isDown;
+        state.down = down.isDown;
+        state.left = left.isDown;
+        state.right = right.isDown;
     }
 }
