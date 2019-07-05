@@ -1,5 +1,5 @@
 import Entity from "../../../../yanecs/Entity";
-import SpriteComponent from "../graphics/SpriteComponent";
+import SpriteComponent from "../SpriteComponent";
 import WallComponent from "../bombs/WallComponent";
 import DestroyableComponent from "../bombs/DestroyableComponent";
 

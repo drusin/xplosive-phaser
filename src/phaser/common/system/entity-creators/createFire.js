@@ -1,5 +1,5 @@
 import Entity from "../../../../yanecs/Entity";
-import SpriteComponent from "../graphics/SpriteComponent";
+import SpriteComponent from "../SpriteComponent";
 import RemoveAfterTimeOutComponent from "../RemoveAfterTimeOutComponent";
 import TimerComponent from "../TimerComponent";
 import FireComponent from "../bombs/FireComponent";

@@ -1,7 +1,7 @@
 import './menu/simple-menu';
 
-import GAME from './phaser/client';
-import constants from './phaser/client/constants';
+import GAME from './phaser';
+import constants from './phaser/common/constants';
 
 const menu = document.createElement('simple-menu');
 const menuContainer = document.getElementById('menu');

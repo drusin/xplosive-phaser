@@ -1,7 +1,7 @@
-import SpriteComponent from "./SpriteComponent";
+import SpriteComponent from "../../../common/system/SpriteComponent";
 import AnimationComponent from "./AnimationComponent";
 import System from '../../../../yanecs/System';
-import StateComponent from '../movement/StateComponent';
+import StateComponent from '../../../common/system/movement/StateComponent';
 
 export default class AnimationSystem extends System {
     constructor () {

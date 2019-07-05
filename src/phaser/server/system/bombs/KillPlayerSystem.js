@@ -1,10 +1,10 @@
 import System from "../../../../yanecs/System";
-import ControlComponent from "../movement/ControlComponent";
-import SpriteComponent from "../graphics/SpriteComponent";
-import DestroyableComponent from "./DestroyableComponent";
-import RemoveAfterTimeOutComponent from "../RemoveAfterTimeOutComponent";
-import TimerComponent from "../TimerComponent";
-import StateComponent from "../movement/StateComponent";
+import ControlComponent from "../../../common/system/movement/ControlComponent";
+import SpriteComponent from "../../../common/system/SpriteComponent";
+import DestroyableComponent from "../../../common/system/bombs/DestroyableComponent";
+import RemoveAfterTimeOutComponent from "../../../common/system/RemoveAfterTimeOutComponent";
+import TimerComponent from "../../../common/system/TimerComponent";
+import StateComponent from "../../../common/system/movement/StateComponent";
 
 export default class KillPlayerSystem extends System {
     constructor () {

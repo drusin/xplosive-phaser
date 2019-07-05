@@ -1,4 +1,4 @@
-import SpriteComponent from "../graphics/SpriteComponent";
+import SpriteComponent from "../SpriteComponent";
 import BombComponent from "../bombs/BombComponent";
 import DestroyableComponent from "../bombs/DestroyableComponent";
 import TimerComponent from "../TimerComponent";

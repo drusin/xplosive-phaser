@@ -1,7 +1,7 @@
 import System from '../../../../yanecs/System';
 import ControlComponent from './ControlComponent';
 import constants from '../../constants';
-import SpriteComponent from "../graphics/SpriteComponent";
+import SpriteComponent from "../SpriteComponent";
 import StateComponent from "./StateComponent";
 
 const { SPEED } = constants;

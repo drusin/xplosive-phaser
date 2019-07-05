@@ -3,7 +3,7 @@ import FireComponent from "./FireComponent";
 import utils from "../../utils";
 import engine from "../../../../yanecs/engine";
 import globalState from "../../globalState";
-import SpriteComponent from "../graphics/SpriteComponent";
+import SpriteComponent from "../SpriteComponent";
 import WallComponent from "./WallComponent";
 import DestroyableComponent from "./DestroyableComponent";
 import createFire from "../entity-creators/createFire";

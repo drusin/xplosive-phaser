@@ -1,4 +1,4 @@
-import Component from "../../../../yanecs/Component";
+import Component from "../../../yanecs/Component";
 
 export default class SpriteComponent extends Component {
     constructor(sprite) {
