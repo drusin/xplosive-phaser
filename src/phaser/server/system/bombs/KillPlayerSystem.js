@@ -8,7 +8,7 @@ import TimerComponent from "../TimerComponent";
 
 export default class KillPlayerSystem extends System {
     constructor () {
-        super (ControlComponent.name, SpriteComponent.name, AnimationComponent.name, DestroyableComponent.name);
+        super (ControlComponent.name, SpriteComponent.name, DestroyableComponent.name);
     }
 
     process(entity) {

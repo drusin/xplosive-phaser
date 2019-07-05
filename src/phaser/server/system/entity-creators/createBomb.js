@@ -10,6 +10,7 @@ import globalState from "../../globalState";
 export default function(pX, pY, munitionComponent) {
 	const { x, y } = utils.quantizeCoordinates(pX, pY, 18);
 	const sprite = globalState.bombs.create(x, y);
+	sprite.visible = false;
 	sprite.setSize(4, 4);
 	// sprite.setOffset(2);
 	// sprite.anims.play(globalState.anims.bomb);

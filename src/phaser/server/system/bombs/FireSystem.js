@@ -54,11 +54,11 @@ export default class FireSystem extends System {
     }
 
     _createFireSprite(oldX, oldY, spriteName) {
-        const { x, y } = utils.quantizeCoordinates(oldX, oldY, 4);
-        const fireSprite = globalState.fire.create(x, y, 'fire');
+        const { x, y } = utils.quantizeCoordinates(oldX, oldY, 16);
+        const fireSprite = globalState.fire.create(x, y);
         fireSprite.setSize(6, 6, true);
+        fireSprite.visible = false;
         fireSprite.setOffset(2, 1);
-        // fireSprite.anims.play(spriteName);
         return fireSprite;
     }
 }

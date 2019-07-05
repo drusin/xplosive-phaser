@@ -9,9 +9,9 @@ import utils from "../../utils";
 
 export default function (x, y, spriteName, controlKeys) {
 	const sprite = globalState.players.create(x, y);
-	sprite.setSize(6, 6, true);
+	sprite.visible = false;
+	sprite.setSize(6, 6);
 	sprite.setCollideWorldBounds(true);
-	sprite.depth = 10;
 	return new Entity()
 		.addComponent(new MunitionComponent())
 		.addComponent(new SpriteComponent(sprite))
