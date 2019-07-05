@@ -44,7 +44,7 @@ export default function () {
         sprite.setSize(8, 8);
         sprite.setOffset(16);
         sprite.visible = false;
-        engine.addEntities(createWall(sprite, tile, true));
+        engine.addEntities(createWall(sprite, tile, true, () => map.removeTileAt(tile.x, tile.y)));
     });
     
     globalState.players = this.physics.add.group();

@@ -26,7 +26,7 @@ function process(time, delta) {
 	for (const system of systems.values()) {
 		const componentNames = system.componentNames;
 		const neededEntities = getEntities(...componentNames);
-		neededEntities.forEach(entity => system.process(entity, delta, time));
+		system.processAll(neededEntities, delta, time);
 	}
 }
 

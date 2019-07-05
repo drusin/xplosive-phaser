@@ -7,7 +7,11 @@ export default class System {
 		return this._componentNames;
 	}
 	
-	process(entity) {
+	processAll(entities, delta, time) {
+		entities.forEach(entity => this.process(entity, delta, time));
+	}
+	
+	process(entity, delta, time) {
 		console.error(`${this.constructor.name} does not overwrite the "process" method!`);
 	}
 }
