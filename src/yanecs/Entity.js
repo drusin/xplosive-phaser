@@ -22,6 +22,7 @@ export default class Entity {
 	}
 
 	removeComponent(componentName) {
+		this._components.get(componentName).cleanUp();
 		this._components.delete(componentName);
 		return this;
 	}

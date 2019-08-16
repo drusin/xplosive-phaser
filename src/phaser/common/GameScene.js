@@ -13,6 +13,6 @@ export default class GameScene extends Phaser.Scene {
     }
 
     update(time, delta) {
-        engine.process(time, delta);
+        engine.process(delta);
     }
 }

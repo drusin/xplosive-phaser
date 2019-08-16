@@ -8,6 +8,6 @@ export default class Component {
 	}
 
 	cleanUp() {
-		//overwrite this for cleanup at removal
+		//overwrite this for cleanup at removal if needed
 	}
 }

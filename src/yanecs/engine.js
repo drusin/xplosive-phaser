@@ -15,7 +15,7 @@ function addSystems(...newSystems) {
 	newSystems.forEach(system => systems.add(system));
 }
 
-function process(time, delta) {
+function process(delta) {
 	Array.from(entities.values())
 		.filter(entity => entity._toRemove)
 		.forEach(entity => {
@@ -26,7 +26,7 @@ function process(time, delta) {
 	for (const system of systems.values()) {
 		const componentNames = system.componentNames;
 		const neededEntities = getEntities(...componentNames);
-		system.processAll(neededEntities, delta, time);
+		system.processAll(neededEntities, delta);
 	}
 }
 
